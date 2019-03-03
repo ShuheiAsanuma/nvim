@@ -1,0 +1,2 @@
+100
+['Shougo/dein.vim', 'Shougo/deoplete-rct', 'Shougo/deoplete.nvim', 'Shougo/vimproc.vim', 'Yggdroot/indentLine', 'bronson/vim-trailing-whitespace', 'chriskempson/vim-tomorrow-theme', 'fishbullet/deoplete-ruby', 'itchyny/lightline.vim', 'osyo-manga/vim-anzu', 'osyo-manga/vim-monster', 'othree/yajs.vim', 'rhysd/accelerated-jk', 'rhysd/clever-f.vim', 'slim-template/vim-slim', 'szw/vim-tags', 'tpope/vim-endwise']

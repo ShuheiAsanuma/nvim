@@ -1,0 +1,37 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+
+# colorschema
+[[plugins]]
+repo = 'chriskempson/vim-tomorrow-theme'
+
+# statusline
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+# インデントを可視化
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
+# 無駄な空白をハイライト
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+# j, k移動高速化
+[[plugins]]
+repo = 'rhysd/accelerated-jk'
+
+# /検索強化
+[[plugins]]
+repo = 'osyo-manga/vim-anzu'
+
+# f検索強化
+[[plugins]]
+repo = 'rhysd/clever-f.vim'
+
+# マルチカーソル
+[[plugins]]
+repo = 'terryma/vim-multiple-cursors'
