@@ -44,3 +44,9 @@ on_ft = ['ruby']
 # Rubyのメソッドの定義元にジャンプ
 [[plugins]]
 repo = 'szw/vim-tags'
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'

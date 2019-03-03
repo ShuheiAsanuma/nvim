@@ -35,3 +35,6 @@ repo = 'rhysd/clever-f.vim'
 # マルチカーソル
 [[plugins]]
 repo = 'terryma/vim-multiple-cursors'
+
+[[plugind]]
+repo = 'Shougo/unite.vim'
