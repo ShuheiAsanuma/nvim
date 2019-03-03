@@ -180,17 +180,21 @@ noremap <C-e> <Nop>
 nnoremap <C-a> ^
 nnoremap <C-e> $
 
-"行頭へ移動
-inoremap <C-a> <C-o>^
-"行末へ移動
-inoremap <C-e> <C-o>$
+vnoremap <C-a> <Nop>
 
 "visual mode行頭へ移動
 vnoremap <C-a> <C-o>^
 "行末へ移動
 vnoremap <C-e> <C-o>$
 
+"行頭へ移動
+inoremap <C-a> <C-o>^
+"行末へ移動
+inoremap <C-e> <C-o>$
+
 vmap <C-a> <C-o>^
 vmap <C-e> <C-o>$
 
 inoremap * <C-o>o
+
+map <C-t> :NERDTreeToggle<CR>
