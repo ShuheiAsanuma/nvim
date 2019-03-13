@@ -6,10 +6,10 @@ endif
 " dein.vimのclone先を指定する
 set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state($HOME . '/.config/nvim.dein')
+if dein#load_state($HOME . '/.cache/dein')
   let g:dein#cache_directory = $HOME . '/.cache/dein'
 
-  call dein#begin($HOME . '/.config/nvim/dein')
+  call dein#begin($HOME . '/.cache/dein')
 
   let s:toml_dir  = $HOME . '/.config/nvim/dein/toml'
   let s:toml      = s:toml_dir . '/dein.toml'
@@ -31,6 +31,8 @@ syntax enable
 if dein#check_install()
   call dein#install()
 endif
+
+call map(dein#check_clean(), "delete(v:val, 'rf')")
 
 "End dein Scripts-------------------------
 
@@ -150,12 +152,13 @@ endif
 
 " for lightline.vim
 set laststatus=2
+set statusline+=%F
 let g:lightline = {
   \ 'colorscheme': 'wombat',
   \ 'active': {
   \   'left': [
   \     ['mode', 'paste'],
-  \     ['readonly', 'filename', 'modified', 'anzu']
+  \     ['readonly', 'filename', 'anzu']
   \   ]
   \ },
   \ 'component_function': {
@@ -175,26 +178,45 @@ imap <C-n> <Down>
 imap <C-b> <Left>
 imap <C-f> <Right>
 
-noremap <C-e> <Nop>
-
 nnoremap <C-a> ^
 nnoremap <C-e> $
 
-vnoremap <C-a> <Nop>
-
 "visual mode行頭へ移動
-vnoremap <C-a> <C-o>^
+vnoremap <C-a> ^
 "行末へ移動
-vnoremap <C-e> <C-o>$
+vnoremap <C-e> $
 
 "行頭へ移動
 inoremap <C-a> <C-o>^
 "行末へ移動
 inoremap <C-e> <C-o>$
 
-vmap <C-a> <C-o>^
-vmap <C-e> <C-o>$
-
 inoremap * <C-o>o
 
 map <C-t> :NERDTreeToggle<CR>
+
+nnoremap Q <Nop>
+
+nnoremap gG :grep '\b<cword>\b'<CR>\|:if len(getqflist())\|:botright copen 3\|else\|ccl\|endif\|cc<CR>
+set grepprg=git\ grep\ -n\ $*\ --\ $(git\ rev-parse\ --show-cdup)
+
+" 自動閉じカッコ
+imap { {}<LEFT>
+imap [ []<LEFT>
+imap ( ()<LEFT>
+
+" 最後のカーソル位置復元
+if has("autocmd")
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal! g'\"" |
+    \ endif
+endif
+
+
+nmap <Tab> gt
+nmap <S-Tab> gT
+
+" ctrlp.vim gitignoreしたファイルは検索しない
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
