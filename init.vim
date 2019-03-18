@@ -152,19 +152,40 @@ endif
 
 " for lightline.vim
 set laststatus=2
-set statusline+=%F
+set statusline=%F
 let g:lightline = {
   \ 'colorscheme': 'wombat',
   \ 'active': {
   \   'left': [
   \     ['mode', 'paste'],
-  \     ['readonly', 'filename', 'anzu']
+  \     ['fugitive', 'readonly', 'fullpathfilename', 'anzu']
   \   ]
   \ },
   \ 'component_function': {
-  \   'anzu': 'anzu#search_status'
+  \   'anzu': 'anzu#search_status',
+  \   'fugitive': 'MyFugitive',
+  \   'fullpathfilename': 'LightlineFilename'
   \ }
   \ }
+
+function! MyFugitive()
+  try
+    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head') && strlen(fugitive#head())
+      return fugitive#head()
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
 
 " 画面分割
 nnoremap s <Nop>
@@ -220,3 +241,11 @@ nmap <S-Tab> gT
 " ctrlp.vim gitignoreしたファイルは検索しない
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
+" nepcomplete.vim
+let g:neocomplete#enable_at_startup = 1
+
+set wildmenu
+set wildmode=list:longest
+
+au QuickfixCmdPost make,grep,grepadd,vimgrep copen
+autocmd QuickFixCmdPost *grep* cwindow

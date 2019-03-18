@@ -51,5 +51,6 @@ repo = 'tpope/vim-rails'
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
 
-[[plugind]]
+[[plugins]]
 repo = 'Shougo/unite.vim'
+
