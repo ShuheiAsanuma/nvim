@@ -38,6 +38,8 @@ call map(dein#check_clean(), "delete(v:val, 'rf')")
 
 " 挿入モードでTABキーを押した際、対応する数のスペースを入力
 set expandtab
+" 外部でファイルに変更がされた場合は読み直す
+set autoread
 " 画面上でタブ文字が占める幅の指定
 set tabstop=2
 " 自動インデントでずれる幅の指定
@@ -221,11 +223,6 @@ nnoremap Q <Nop>
 nnoremap gG :grep '\b<cword>\b'<CR>\|:if len(getqflist())\|:botright copen 3\|else\|ccl\|endif\|cc<CR>
 set grepprg=git\ grep\ -n\ $*\ --\ $(git\ rev-parse\ --show-cdup)
 
-" 自動閉じカッコ
-imap { {}<LEFT>
-imap [ []<LEFT>
-imap ( ()<LEFT>
-
 " 最後のカーソル位置復元
 if has("autocmd")
     autocmd BufReadPost *
@@ -247,5 +244,38 @@ let g:neocomplete#enable_at_startup = 1
 set wildmenu
 set wildmode=list:longest
 
-au QuickfixCmdPost make,grep,grepadd,vimgrep copen
 autocmd QuickFixCmdPost *grep* cwindow
+
+" ctrlp設定
+" デフォルトのマッピングを無効化(default:'<C-p>')
+" let g:ctrlp_map = '<Nop>'
+
+" 対象ファイル最大数(default:10000)
+let g:ctrlp_max_files  = 100000
+
+" 検索対象の最大階層数(default:40)
+let g:ctrlp_max_depth = 10
+
+" 遅延再描画
+let g:ctrlp_lazy_update = 1
+
+" vim終了時にキャッシュクリアしない(default:1)
+let g:ctrlp_clear_cache_on_exit = 0
+
+" 検索ウィンドウの設定
+" :help g:ctrlp_match_window
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:50'
+
+" カレントディレクトリを基準に検索
+nnoremap <silent> <Space>cf :CtrlPCurWD<CR>
+
+" カレントバッファのルートディレクトリを基準に検索(root:自動認識)
+nnoremap <silent> <Space>cF :CtrlPRoot<CR>
+
+" 最近使ったファイルから検索
+nnoremap <silent> <Space>cr :CtrlPMRUFiles<CR>
+
+" Turn off paste mode when leaving insert
+autocmd InsertLeave * set nopaste
+
+autocmd FileType vue syntax sync fromstart

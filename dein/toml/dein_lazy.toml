@@ -8,6 +8,9 @@ on_ft = ['slim']
 repo = 'othree/yajs.vim'
 on_ft = ['javascript']
 
+# vueのシンタックスハイライト
+repo = 'posva/vim-vue'
+
 # コードの自動補完
 # [[plugins]]
 # repo = 'Shougo/deoplete.nvim'

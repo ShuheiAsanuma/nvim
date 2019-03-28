@@ -54,3 +54,7 @@ repo = 'ctrlpvim/ctrlp.vim'
 [[plugins]]
 repo = 'Shougo/unite.vim'
 
+# pugのシンタックスハイライト
+[[plugins]]
+repo = 'digitaltoad/vim-pug'
+
